@@ -17,10 +17,15 @@
             <Label #lblTensao class="lbl-temp" text="230 V" textWrap="true"></Label>
         </StackLayout>
     </GridLayout>
-    <GridLayout marginTop="20" columns="*,2*" rows="*,*" width="300" height="200">
-        <Label text="Comando:" col="0" row="0" horizontalAlignment="center" verticalAlignment="center" class="lbl-prompt"></Label>
-        <Switch #switchMotor (loaded)="swMotorLoaded($event)" checked="false" (checkedChange)="toggleMotor()" col="1" row="0"></Switch>
-        <Label text="Sentido:" col="0" row="1" horizontalAlignment="center" verticalAlignment="center" class="lbl-prompt"></Label>
-        <Switch #switchSentido (loaded)="swSentidoLoaded($event)" checked="false" (checkedChange)="toggleSentido()" col="1" row="1"></Switch>
-    </GridLayout>
+    <StackLayout marginTop="40" class="page" orientation="vertical" backgroundColor="#D42929">
+        <Label text="" class="lbl-divider" horizontalAlignment="center"></Label>
+    </StackLayout>
+    <StackLayout marginTop="40" orientation="vertical">
+        <Label text="Comando:" class="lbl-prompt" horizontalAlignment="center"></Label>
+        <Switch #switchMotor (loaded)="swMotorLoaded($event)" checked="false" (checkedChange)="toggleMotor()" horizontalAlignment="center"></Switch>
+    </StackLayout>
+    <StackLayout marginTop="40" orientation="vertical">
+        <Label text="Sentido:" class="lbl-prompt" horizontalAlignment="center"></Label>
+        <Switch #switchSentido (loaded)="swSentidoLoaded($event)" checked="false" (checkedChange)="toggleSentido()" horizontalAlignment="center"></Switch>
+    </StackLayout>
 </StackLayout>
