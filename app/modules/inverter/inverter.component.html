@@ -1,0 +1,26 @@
+<ActionBar title="Inversor CFW08" class="top-bar">
+</ActionBar>
+<StackLayout class="page" orientation="vertical" backgroundColor="#CFD8DC">
+    <Button text="Conectar" #btnConnect (tap)="toggleConnection()" class="btn-connect" borderRadius="10" borderWidth="2" borderColor="white"></Button>
+    <GridLayout marginTop="30" columns="*,*" rows="*,*,*" width="300" height="150">
+        <Label text="Freqüência:" col="0" row="0" horizontalAlignment="center" verticalAlignment="center" class="lbl-prompt"></Label>
+        <StackLayout orientation="vertical" (tap)="changeFrquency()" backgroundColor="black" col="1" row="0" borderRadius="10" borderWidth="2"
+            borderColor="white">
+            <Label text="60.00 Hz" class="lbl-sp" textWrap="true"></Label>
+        </StackLayout>
+        <Label text="Corrente:" col="0" row="1" horizontalAlignment="center" verticalAlignment="center" class="lbl-prompt"></Label>
+        <StackLayout orientation="vertical" backgroundColor="black" col="1" row="1" borderRadius="10" borderWidth="2" borderColor="white">
+            <Label #lblCorrente class="lbl-temp" text="1.2 A" textWrap="true"></Label>
+        </StackLayout>
+        <Label text="Tensão:" col="0" row="2" horizontalAlignment="center" verticalAlignment="center" class="lbl-prompt"></Label>
+        <StackLayout orientation="vertical" backgroundColor="black" col="1" row="2" borderRadius="10" borderWidth="2" borderColor="white">
+            <Label #lblTensao class="lbl-temp" text="230 V" textWrap="true"></Label>
+        </StackLayout>
+    </GridLayout>
+    <GridLayout marginTop="20" columns="*,2*" rows="*,*" width="300" height="200">
+        <Label text="Comando:" col="0" row="0" horizontalAlignment="center" verticalAlignment="center" class="lbl-prompt"></Label>
+        <Switch #switchMotor (loaded)="swMotorLoaded($event)" checked="false" (checkedChange)="toggleMotor()" col="1" row="0"></Switch>
+        <Label text="Sentido:" col="0" row="1" horizontalAlignment="center" verticalAlignment="center" class="lbl-prompt"></Label>
+        <Switch #switchSentido (loaded)="swSentidoLoaded($event)" checked="false" (checkedChange)="toggleSentido()" col="1" row="1"></Switch>
+    </GridLayout>
+</StackLayout>
