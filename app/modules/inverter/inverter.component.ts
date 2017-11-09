@@ -84,10 +84,11 @@ export class InverterComponent implements AfterViewInit {
     }
 
     public toggleMotor() {
-        if (this.switchMotor.checked) {
-            console.log("LIGADO");
+        if (!this.isConnected) {
+            TNSFancyAlert.showWarning("Atenção", "Desconectado do dispositivo.", "Voltar");
+            return;
         } else {
-            console.log("DESLIGADO");
+            this.deviceCommandService.sendCommand(this.switchMotor.checked);
         }
     }
 

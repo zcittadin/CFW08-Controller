@@ -46,6 +46,19 @@ export class DeviceCommandService {
         return true;
     }
 
+    sendCommand(commandBit: boolean) {
+        let command: string;
+        if (commandBit)
+            command = 'LIGAR';
+        else
+            command = 'DESLIGAR';
+        let arr = this.convertToAsciiArray(command).map(param => {
+            return this.convertToHexString(param);
+        }).join(",");
+        const updateMessage = this.getMessage(this.arduino.UUID, arr);
+        this.bluetoothService.write(updateMessage);
+    }
+
     sendValue(setPoint: number): boolean {
         if (!this.arduino) {
             return false;
@@ -106,6 +119,14 @@ export class DeviceCommandService {
             myValues.push(Number(str.charAt(i)));
         }
         return myValues;
+    }
+
+    convertToAsciiArray(command: string): number[] {
+        let arr: number[] = new Array();
+        for (let i = 0; i < command.length; i++) {
+            arr.push(command.charCodeAt(i));
+        }
+        return arr;
     }
 
 }
