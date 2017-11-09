@@ -6,7 +6,7 @@ import { BleDevice } from '../models/ble-device.model';
 export class DeviceCommandService {
     arduino: BleDevice;
     private connectionStatus: boolean = false;
-    private temperatura: number;
+    private variables: number;
 
     constructor(private bluetoothService: BluetoothService) { }
 
@@ -81,13 +81,13 @@ export class DeviceCommandService {
             characteristicUUID: 'ffe1',
             onNotify: function (result) {
                 const data = new Uint8Array(result.value);
-                this.temperatura = data;
+                this.variables = data;
             }.bind(this)
         };
     }
 
-    getTemperatura(): number {
-        return this.temperatura;
+    getVariables(): number {
+        return this.variables;
     }
 
     getArduino(): BleDevice {

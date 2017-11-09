@@ -6,15 +6,15 @@
         <Label text="Freqüência:" col="0" row="0" horizontalAlignment="center" verticalAlignment="center" class="lbl-prompt"></Label>
         <StackLayout orientation="vertical" (tap)="changeFrquency()" backgroundColor="black" col="1" row="0" borderRadius="10" borderWidth="2"
             borderColor="white">
-            <Label text="60.00 Hz" class="lbl-sp" textWrap="true"></Label>
+            <Label [text]="frequencyRX + ' Hz'" class="lbl-sp" textWrap="true"></Label>
         </StackLayout>
         <Label text="Corrente:" col="0" row="1" horizontalAlignment="center" verticalAlignment="center" class="lbl-prompt"></Label>
         <StackLayout orientation="vertical" backgroundColor="black" col="1" row="1" borderRadius="10" borderWidth="2" borderColor="white">
-            <Label #lblCorrente class="lbl-temp" text="1.2 A" textWrap="true"></Label>
+            <Label #lblCorrente class="lbl-temp" [text]="currentRX + ' A'" textWrap="true"></Label>
         </StackLayout>
         <Label text="Tensão:" col="0" row="2" horizontalAlignment="center" verticalAlignment="center" class="lbl-prompt"></Label>
         <StackLayout orientation="vertical" backgroundColor="black" col="1" row="2" borderRadius="10" borderWidth="2" borderColor="white">
-            <Label #lblTensao class="lbl-temp" text="230 V" textWrap="true"></Label>
+            <Label #lblTensao class="lbl-temp" [text]="voltageRX + ' V'" textWrap="true"></Label>
         </StackLayout>
     </GridLayout>
     <StackLayout marginTop="40" class="page" orientation="vertical" backgroundColor="#D42929">
