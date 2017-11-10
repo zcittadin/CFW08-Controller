@@ -46,12 +46,25 @@ export class DeviceCommandService {
         return true;
     }
 
-    sendCommand(commandBit: boolean) {
+    sendCommandOnOff(commandBit: boolean) {
         let command: string;
         if (commandBit)
             command = 'LIGAR';
         else
             command = 'DESLIGAR';
+        let arr = this.convertToAsciiArray(command).map(param => {
+            return this.convertToHexString(param);
+        }).join(",");
+        const updateMessage = this.getMessage(this.arduino.UUID, arr);
+        this.bluetoothService.write(updateMessage);
+    }
+
+    sendCommandRotation(commandBit: boolean) {
+        let command: string;
+        if (commandBit)
+            command = 'HHHHHHHH';
+        else
+            command = 'AHAHAHAH';
         let arr = this.convertToAsciiArray(command).map(param => {
             return this.convertToHexString(param);
         }).join(",");

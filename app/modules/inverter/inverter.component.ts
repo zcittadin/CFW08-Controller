@@ -88,15 +88,16 @@ export class InverterComponent implements AfterViewInit {
             TNSFancyAlert.showWarning("Atenção", "Desconectado do dispositivo.", "Voltar");
             return;
         } else {
-            this.deviceCommandService.sendCommand(this.switchMotor.checked);
+            this.deviceCommandService.sendCommandOnOff(this.switchMotor.checked);
         }
     }
 
     public toggleSentido() {
-        if (this.switchSentido.checked) {
-            console.log("HORÁRIO");
+        if (!this.isConnected) {
+            TNSFancyAlert.showWarning("Atenção", "Desconectado do dispositivo.", "Voltar");
+            return;
         } else {
-            console.log("ANTI-HORÁRIO");
+            this.deviceCommandService.sendCommandRotation(this.switchSentido.checked);
         }
     }
 
