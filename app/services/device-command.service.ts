@@ -79,7 +79,6 @@ export class DeviceCommandService {
         let arr = this.convertToNumberArray(setPoint).map(param => {
             return this.convertToHexString(param);
         }).join(",");
-
         const updateMessage = this.getMessage(this.arduino.UUID, arr);
         this.bluetoothService.write(updateMessage);
         return true;

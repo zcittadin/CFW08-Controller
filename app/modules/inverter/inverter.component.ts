@@ -5,6 +5,9 @@ import { Switch } from "ui/switch";
 
 import { TNSFancyAlert, TNSFancyAlertButton } from "nativescript-fancyalert";
 
+import { ModalDialogService } from "nativescript-angular/directives/dialogs";
+import { ModalComponent } from "../modal/app.modal";
+
 import { Button } from "ui/button";
 import { Color } from "color";
 
@@ -21,6 +24,7 @@ export class InverterComponent implements AfterViewInit {
 
     scanRate;
     dataRead: any;
+    frequencyTX: number;
     frequencyRX: number = 0;
     currentRX: number = 0;
     voltageRX: number = 0;
@@ -38,7 +42,8 @@ export class InverterComponent implements AfterViewInit {
     @ViewChild("switchSentido") switchSentidoRef: ElementRef;
 
     constructor(private deviceCommandService: DeviceCommandService,
-        private bluetoothService: BluetoothService) { }
+        private bluetoothService: BluetoothService,
+        private modal: ModalDialogService, private vcRef: ViewContainerRef) { }
 
     ngAfterViewInit() {
         this.btnConnect = <Button>this.btnConnectRef.nativeElement;
@@ -80,7 +85,27 @@ export class InverterComponent implements AfterViewInit {
     }
 
     public changeFrquency() {
-        TNSFancyAlert.showSuccess("OK", "Mude a freqüência.", "Voltar");
+        let options = {
+            context: {},
+            fullscreen: true,
+            viewContainerRef: this.vcRef
+        };
+        this.modal.showModal(ModalComponent, options).then(res => {
+            this.frequencyTX = res;
+            this.send();
+        });
+    }
+
+    public send() {
+        if (!this.isConnected) {
+            TNSFancyAlert.showWarning("Atenção", "Desconectado do dispositivo.", "Voltar");
+            this.frequencyTX = null;
+            return;
+        }
+        else {
+            if (this.frequencyTX != null)
+                this.deviceCommandService.sendValue(this.frequencyTX);
+        }
     }
 
     public toggleMotor() {

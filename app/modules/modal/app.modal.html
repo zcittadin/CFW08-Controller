@@ -1,0 +1,6 @@
+<ActionBar title="Inversor CFW08" class="top-bar">
+</ActionBar>
+<StackLayout class="page" orientation="vertical" backgroundColor="#CFD8DC">
+    <TextField hint="Freqüência" #txtFrequencia keyboardType="number" [(ngModel)]="frequencia"></TextField>
+    <Button text="Enviar" #btnSend (tap)="close(frequencia)" class="btn-send" borderRadius="10" borderWidth="2" borderColor="white"></Button>
+</StackLayout>
